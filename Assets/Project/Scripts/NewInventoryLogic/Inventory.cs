@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts
 {
@@ -8,10 +9,10 @@ namespace Project.Scripts
     {
         public static Inventory Instance;
         
-        [SerializeField] public ItemsDataList itemsList;
+        [SerializeField] private ItemsDataList _itemsDataList;
+        [SerializeField] private Hotbar _hotbar;
         
         public List<ItemData> CurrentItems = new();
-        
         public List<UISlot> slots = new List<UISlot>();
 
 
@@ -24,28 +25,25 @@ namespace Project.Scripts
         {
             for (int i = 0; i < slots.Count; i++)
             {
-                slots[i].Icon.sprite = itemsList.Items[0].ItemIcon;
+                slots[i].Icon.sprite = _itemsDataList.Items[0].ItemIcon;
             }
         }
         
         public bool AddItemInInventory(string index, int count = 1)
         {
-            ItemData item = default;
-            
-            for (int i = 0; i < itemsList.Items.Count; i++)
+            if (_hotbar.TryAddItem(index, count))
             {
-                if (itemsList.Items[i].ItemIndex == index)
-                {
-                    item = itemsList.Items[i];
-                    CurrentItems.Add(itemsList.Items[i]);
-                }
+                return true;
             }
-            foreach (var slot in slots)
+
+            var item = _itemsDataList.GetItemDataByIndex(index);
+            
+            for (int i = 0; i < slots.Count; i++)
             {
-                if (slot.Item.ItemIndex != "0")
+                if (string.IsNullOrEmpty(slots[i].Item.ItemIndex))
                 {
-                    slot.Icon.sprite = item.ItemIcon;
-                    slot.CountText.text = count.ToString();
+                    slots[i].Item = item;
+                    slots[i].Icon.sprite = item.ItemIcon;
                     return true;
                 }
             }
@@ -53,6 +51,5 @@ namespace Project.Scripts
             Debug.Log("Inventory is full");
             return false;
         }
-        
     }
 }
