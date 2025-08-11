@@ -6,6 +6,7 @@ namespace Project.Scripts
 {
     public class Hotbar : MonoBehaviour
     {
+        public static Hotbar Instance;
         [SerializeField] private GameObject _itemHolder;
         [SerializeField] private ItemsDataList _itemsDataList;
         [SerializeField] private List<GameObject> _slotsBorders = new();
@@ -18,6 +19,8 @@ namespace Project.Scripts
 
         private void Awake()
         {
+            Instance = this;
+            
             for (int i = 0; i < _slotsBorders.Count; i++)
             {
                 _slotsBorders[i].GetComponent<Image>().color = _colorInactive;
@@ -45,6 +48,7 @@ namespace Project.Scripts
         {
             if (string.IsNullOrEmpty(itemIndex))
             {
+                Destroy(_currentItemInHands);
                 return;
             }
             

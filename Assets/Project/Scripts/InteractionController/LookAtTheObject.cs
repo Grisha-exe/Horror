@@ -23,10 +23,10 @@ namespace Project.Scripts.InteractionController
             {
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
                 
-                if (hit.collider.GetComponent<PickapableItem>() != null)
+                if (hit.collider.GetComponent<PickableItem>() != null)
                 {
-                    var index = hit.collider.GetComponent<PickapableItem>().Index;
-                    uiController.ShowPickupWindow(index, hit.collider.GetComponent<PickapableItem>());
+                    var index = hit.collider.GetComponent<PickableItem>().Index;
+                    uiController.ShowPickupWindow(index, hit.collider.GetComponent<PickableItem>());
                 }
                 else
                 {

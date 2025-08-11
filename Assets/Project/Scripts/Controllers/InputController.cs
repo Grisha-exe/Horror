@@ -1,22 +1,13 @@
-﻿using System;
-using Project.Scripts;
+﻿using Project.Scripts;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace InventorySystem
 {
     public class InputController : MonoBehaviour
     {
-        [FormerlySerializedAs("_inventoryController")] [SerializeField] private UIController uiController;
+        [SerializeField] private UIController uiController;
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private CameraController _cameraController;
-        private Hotbar _hotBar;
-
-        private void Awake()
-        {
-            _hotBar = FindObjectOfType<Hotbar>();
-        }
-
 
         private void Update()
         {
@@ -28,15 +19,15 @@ namespace InventorySystem
             
             if (Input.GetKeyDown(KeyCode.E)) uiController.PickUp();
             
-            if (Input.GetKeyDown(KeyCode.Alpha1)) _hotBar.SetActiveSlot(0);
+            if (Input.GetKeyDown(KeyCode.Alpha1)) Hotbar.Instance.SetActiveSlot(0);
             
-            if (Input.GetKeyDown(KeyCode.Alpha2)) _hotBar.SetActiveSlot(1);
+            if (Input.GetKeyDown(KeyCode.Alpha2)) Hotbar.Instance.SetActiveSlot(1);
             
-            if (Input.GetKeyDown(KeyCode.Alpha3)) _hotBar.SetActiveSlot(2);
+            if (Input.GetKeyDown(KeyCode.Alpha3)) Hotbar.Instance.SetActiveSlot(2);
             
-            if (Input.GetKeyDown(KeyCode.Alpha4)) _hotBar.SetActiveSlot(3);
+            if (Input.GetKeyDown(KeyCode.Alpha4)) Hotbar.Instance.SetActiveSlot(3);
             
-            if (Input.GetKeyDown(KeyCode.Alpha5)) _hotBar.SetActiveSlot(4);
+            if (Input.GetKeyDown(KeyCode.Alpha5)) Hotbar.Instance.SetActiveSlot(4);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Project.Scripts
             }
         }
         
-        public bool AddItemInInventory(string index, int count = 1)
+        public bool TryAddItemInInventory(string index, int count = 1)
         {
             if (_hotbar.TryAddItem(index, count))
             {

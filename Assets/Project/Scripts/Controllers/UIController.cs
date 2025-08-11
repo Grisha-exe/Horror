@@ -1,5 +1,4 @@
 ﻿using Project.Scripts;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -7,18 +6,18 @@ namespace InventorySystem
 {
     public class UIController : MonoBehaviour
     {
+        public bool IsOpened = true;
+        
         [SerializeField] private ItemsDataList _itemDataList;
         [SerializeField] private CameraController _cameraController;
-        [SerializeField] public InteractionPanel InteractionPanel;
-
-        [FormerlySerializedAs("Canvas")] [SerializeField]
-        public GameObject InventoryOverlay;
+        [SerializeField] private InteractionPanel _interactionPanel;
+        [SerializeField] private GameObject _inventoryOverlay;
 
         private string _currentItemIndex;
-        private PickapableItem _currentPickUpPickapableItem;
+        private PickableItem _currentPickUpPickableItem;
+        
+        private bool _isPickupWindowOpen = true;
 
-        public bool IsOpened = true;
-        private bool IsPickupWindowOpen = true;
 
         private void Start()
         {
@@ -46,59 +45,56 @@ namespace InventorySystem
             
         }
 
-        public void Show()
+        private void Show()
         {
-            InventoryOverlay.SetActive(true);
+            _inventoryOverlay.SetActive(true);
             IsOpened = true;
         }
 
-        public void Hide()
+        private void Hide()
         {
-            InventoryOverlay.SetActive(false);
+            _inventoryOverlay.SetActive(false);
             IsOpened = false;
         }
 
 
-        public void ShowPickupWindow(string index, PickapableItem pickapableItem)
+        public void ShowPickupWindow(string index, PickableItem pickableItem)
         {
-            if (IsPickupWindowOpen)
+            if (_isPickupWindowOpen)
                 return;
 
-            IsPickupWindowOpen = true;
+            _isPickupWindowOpen = true;
 
-            InteractionPanel.gameObject.SetActive(true);
+            _interactionPanel.gameObject.SetActive(true);
 
-            for (int i = 0; i < _itemDataList.Items.Count; i++)
+            var item = _itemDataList.GetItemDataByIndex(index);
+
+            if (item != null)
             {
-                if (_itemDataList.Items[i].ItemIndex == index)
-                {
-                    InteractionPanel.SetDataForInteraction(_itemDataList.Items[i].ItemName);
-                    _currentItemIndex = index;
-                    _currentPickUpPickapableItem =  pickapableItem;
-                }
+                _interactionPanel.SetDataForInteraction(item.ItemName);
+                _currentItemIndex = index;
+                _currentPickUpPickableItem = pickableItem;
             }
         }
 
         public void HidePickupWindow()
         {
-            if (!IsPickupWindowOpen)
+            if (!_isPickupWindowOpen)
                 return;
 
-            IsPickupWindowOpen = false;
+            _isPickupWindowOpen = false;
 
-            InteractionPanel.gameObject.SetActive(false);
+            _interactionPanel.gameObject.SetActive(false);
         }
 
         public void PickUp()
         {
-            if (IsPickupWindowOpen)
+            if (_isPickupWindowOpen)
             {
-                _itemDataList.GetItemDataByIndex(_currentItemIndex);
-                Inventory.Instance.AddItemInInventory(_currentItemIndex);
-                
-                Destroy(_currentPickUpPickapableItem.gameObject);
-                
-                //addItemsToHandsController.AddItemToHands(_currentItemIndex);
+                if (Inventory.Instance.TryAddItemInInventory(_currentItemIndex))
+                {
+                    Destroy(_currentPickUpPickableItem.gameObject);
+                }
             }
         }
     }
