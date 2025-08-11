@@ -10,7 +10,6 @@ namespace InventorySystem
         [SerializeField] private ItemsDataList _itemDataList;
         [SerializeField] private CameraController _cameraController;
         [SerializeField] public InteractionPanel InteractionPanel;
-        [SerializeField] private AddItemsToHandsController addItemsToHandsController;
 
         [FormerlySerializedAs("Canvas")] [SerializeField]
         public GameObject InventoryOverlay;

@@ -1,18 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Project.Scripts
 {
     public class Hotbar : MonoBehaviour
     {
+        [SerializeField] private List<PickapableItem> _items;
+        [SerializeField] private GameObject ItemHolder;
+        [SerializeField] private ItemsDataList _itemsDataList;
         public List<UISlot> HotbarSlots = new List<UISlot>();
         public int activeSlotIndex = 0;
-        private AddItemsToHandsController _addItemsToHandsController;
+
+        private GameObject _itemInHands;
+
+        public void AddItemToHands(string index)
+        {
+            Destroy(_itemInHands);
+
+            if (Inventory.Instance.CurrentItems.Count <= int.Parse(index))
+            {
+                return;
+            }
+        
+            _itemInHands = Instantiate(Inventory.Instance.CurrentItems[int.Parse(index)].ItemModelPrefab, ItemHolder.transform);
+            _itemInHands.transform.rotation = ItemHolder.transform.rotation;
+        }
 
         private void Awake()
         {
-            _addItemsToHandsController = FindObjectOfType<AddItemsToHandsController>();
+            _items = FindObjectsOfType<PickapableItem>().ToList();
+
             
             for (int i = 0; i < Inventory.Instance.borders.Count; i++)
             {
@@ -28,8 +47,6 @@ namespace Project.Scripts
                 activeSlotIndex = slotIndex;
                 Debug.Log("Active slot: " + activeSlotIndex);
                 
-                _addItemsToHandsController.AddItemToHands(Inventory.Instance.CurrentItems[slotIndex].ItemIndex);
-
                 for (int i = 0; i < Inventory.Instance.borders.Count; i++)
                 {
                     Inventory.Instance.borders[i].SetActive(false);
