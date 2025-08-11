@@ -68,11 +68,11 @@ namespace InventorySystem
 
             InteractionPanel.gameObject.SetActive(true);
 
-            for (int i = 0; i < _itemDataList.items.Count; i++)
+            for (int i = 0; i < _itemDataList.Items.Count; i++)
             {
-                if (_itemDataList.items[i].ItemIndex == index)
+                if (_itemDataList.Items[i].ItemIndex == index)
                 {
-                    InteractionPanel.SetDataForInteraction(_itemDataList.items[i].ItemName);
+                    InteractionPanel.SetDataForInteraction(_itemDataList.Items[i].ItemName);
                     _currentItemIndex = index;
                     _currentPickUpPickapableItem =  pickapableItem;
                 }
@@ -93,7 +93,7 @@ namespace InventorySystem
         {
             if (IsPickupWindowOpen)
             {
-                _itemDataList.GetItemDataById(_currentItemIndex);
+                _itemDataList.GetItemDataByIndex(_currentItemIndex);
                 Inventory.Instance.AddItemInInventory(_currentItemIndex);
                 
                 Destroy(_currentPickUpPickapableItem.gameObject);

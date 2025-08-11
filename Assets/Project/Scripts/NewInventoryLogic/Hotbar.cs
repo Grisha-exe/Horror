@@ -1,59 +1,64 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Project.Scripts
 {
     public class Hotbar : MonoBehaviour
     {
-        [SerializeField] private GameObject ItemHolder;
+        [SerializeField] private GameObject _itemHolder;
         [SerializeField] private ItemsDataList _itemsDataList;
-        
-        public List<UISlot> HotbarSlots = new List<UISlot>();
+        [SerializeField] private List<GameObject> _slotsBorders = new();
+        [SerializeField] private Color _activeItemColor = Color.green;
+
+        [SerializeField] private List<UISlot> _hotbarSlots = new();
         public int activeSlotIndex = 0;
-        private GameObject _itemInHands;
-        
+        private GameObject _currentItemInHands;
+        private Color _colorInactive = Color.clear;
+
         private void Awake()
         {
-            for (int i = 0; i < Inventory.Instance.borders.Count; i++)
+            for (int i = 0; i < _slotsBorders.Count; i++)
             {
-                Inventory.Instance.borders[i].SetActive(false);
+                _slotsBorders[i].GetComponent<Image>().color = _colorInactive;
             }
         }
-        
-        public void AddItemToHands(string index)
-        {
-            Destroy(_itemInHands);
 
-            if (Inventory.Instance.CurrentItems.Count <= int.Parse(index))
+        public void AddItemToHands(string itemIndex)
+        {
+            if (_currentItemInHands != null)
             {
-                return;
+                Destroy(_currentItemInHands);
             }
-        
-            _itemInHands = Instantiate(Inventory.Instance.CurrentItems[int.Parse(index)].ItemModelPrefab, ItemHolder.transform);
-            _itemInHands.transform.rotation = ItemHolder.transform.rotation;
+
+            var itemToTakeInHands = _itemsDataList.GetItemDataByIndex(itemIndex);
+
+            _currentItemInHands = Instantiate(itemToTakeInHands.ItemModelPrefab, _itemHolder.transform);
+            _currentItemInHands.transform.rotation = _itemHolder.transform.rotation;
         }
 
         public void SetActiveSlot(int slotIndex)
         {
-            if (slotIndex >= 0 && slotIndex < HotbarSlots.Count)
+            if (slotIndex < 0 || slotIndex >= _hotbarSlots.Count || slotIndex == activeSlotIndex)
             {
-                
-                activeSlotIndex = slotIndex;
-                Debug.Log("Active slot: " + activeSlotIndex);
-                
-                for (int i = 0; i < Inventory.Instance.borders.Count; i++)
-                {
-                    Inventory.Instance.borders[i].SetActive(false);
-                }
-                
-                Inventory.Instance.borders[slotIndex].SetActive(true);
+                return;
             }
+
+            activeSlotIndex = slotIndex;
+            Debug.Log("Active slot: " + activeSlotIndex);
+
+            for (int i = 0; i < _slotsBorders.Count; i++)
+            {
+                _slotsBorders[i].GetComponent<Image>().color = _colorInactive;
+            }
+
+            _slotsBorders[slotIndex].GetComponent<Image>().color = _activeItemColor;
         }
+
 
         public UISlot GetActiveSlot()
         {
-            return HotbarSlots[activeSlotIndex];
+            return _hotbarSlots[activeSlotIndex];
         }
     }
 }

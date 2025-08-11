@@ -8,8 +8,6 @@ namespace Project.Scripts
     {
         public static Inventory Instance;
         
-        public List<GameObject> borders = new List<GameObject>();
-        
         [SerializeField] public ItemsDataList itemsList;
         
         public List<ItemData> CurrentItems = new();
@@ -26,7 +24,7 @@ namespace Project.Scripts
         {
             for (int i = 0; i < slots.Count; i++)
             {
-                slots[i].Icon.sprite = itemsList.items[0].ItemIcon;
+                slots[i].Icon.sprite = itemsList.Items[0].ItemIcon;
             }
         }
         
@@ -34,12 +32,12 @@ namespace Project.Scripts
         {
             ItemData item = default;
             
-            for (int i = 0; i < itemsList.items.Count; i++)
+            for (int i = 0; i < itemsList.Items.Count; i++)
             {
-                if (itemsList.items[i].ItemIndex == index)
+                if (itemsList.Items[i].ItemIndex == index)
                 {
-                    item = itemsList.items[i];
-                    CurrentItems.Add(itemsList.items[i]);
+                    item = itemsList.Items[i];
+                    CurrentItems.Add(itemsList.Items[i]);
                 }
             }
             foreach (var slot in slots)
