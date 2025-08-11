@@ -62,9 +62,6 @@ namespace InventorySystem
 
         public void ShowPickupWindow(string index, PickapableItem pickapableItem)
         {
-            Debug.Log(IsPickupWindowOpen);
-            Debug.Log(InteractionPanel);
-            
             if (IsPickupWindowOpen)
                 return;
 
