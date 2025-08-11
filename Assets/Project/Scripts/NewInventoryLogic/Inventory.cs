@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Project.Scripts
+namespace Scripts
 {
     public class Inventory : MonoBehaviour
     {
@@ -13,9 +11,8 @@ namespace Project.Scripts
         [SerializeField] private Hotbar _hotbar;
         
         public List<ItemData> CurrentItems = new();
-        public List<UISlot> slots = new List<UISlot>();
-
-
+        public List<UISlot> slots = new ();
+        
         public void Awake()
         {
             Instance = this;
@@ -25,7 +22,7 @@ namespace Project.Scripts
         {
             for (int i = 0; i < slots.Count; i++)
             {
-                slots[i].Icon.sprite = _itemsDataList.Items[0].ItemIcon;
+                slots[i].Icon.sprite = _itemsDataList.GetDefaultItem().ItemIcon;
             }
         }
         

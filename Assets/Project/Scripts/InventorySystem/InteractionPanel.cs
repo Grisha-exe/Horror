@@ -1,11 +1,9 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace InventorySystem
+namespace Scripts
 {
     public class InteractionPanel : MonoBehaviour
-
     {
         [SerializeField] private TMP_Text _itemName;
 

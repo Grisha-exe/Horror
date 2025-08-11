@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Project.Scripts
+namespace Scripts
 {
     public class Hotbar : MonoBehaviour
     {
@@ -44,7 +44,7 @@ namespace Project.Scripts
             return false;
         }
         
-        public void AddItemToHands(string itemIndex)
+        private void AddItemToHands(string itemIndex)
         {
             if (string.IsNullOrEmpty(itemIndex))
             {

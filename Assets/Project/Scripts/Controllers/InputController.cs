@@ -1,7 +1,6 @@
-﻿using Project.Scripts;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace InventorySystem
+namespace Scripts
 {
     public class InputController : MonoBehaviour
     {

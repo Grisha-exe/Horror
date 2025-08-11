@@ -1,11 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Project.Scripts
+namespace Scripts
 {
     public class PickableItem : MonoBehaviour
     {
         public string Index;
-        public int count = 1;
+        public int Count = 1;
     }
 }

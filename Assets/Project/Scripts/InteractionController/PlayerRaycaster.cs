@@ -1,18 +1,10 @@
-using System;
-using InventorySystem;
 using UnityEngine;
 
-namespace Project.Scripts.InteractionController
+namespace Scripts
 {
-    public class LookAtTheObject : MonoBehaviour
+    public class PlayerRaycaster : MonoBehaviour
     {
         [SerializeField] private float _rayLength = 5f;
-        [SerializeField] private UIController uiController;
-
-        private void Start()
-        {
-            uiController = FindObjectOfType<UIController>();
-        }
 
         private void Update()
         {
@@ -23,20 +15,21 @@ namespace Project.Scripts.InteractionController
             {
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
                 
-                if (hit.collider.GetComponent<PickableItem>() != null)
+                var item = hit.collider.GetComponent<PickableItem>();
+                
+                if (item != null)
                 {
-                    var index = hit.collider.GetComponent<PickableItem>().Index;
-                    uiController.ShowPickupWindow(index, hit.collider.GetComponent<PickableItem>());
+                    UIController.Instance.ShowPickupWindow(item.Index, item);
                 }
                 else
                 {
-                    uiController.HidePickupWindow();
+                    UIController.Instance.HidePickupWindow();
                 }
             }
             else
             {
                 Debug.DrawRay(ray.origin, ray.direction * _rayLength, Color.blue);
-                uiController.HidePickupWindow();
+                UIController.Instance.HidePickupWindow();
             }
         }
     }

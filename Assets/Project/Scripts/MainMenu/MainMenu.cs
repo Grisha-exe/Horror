@@ -1,11 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Project.Scripts.MainMenu
+namespace Scripts
 {
     public class MainMenu : MonoBehaviour
-
     {
         [SerializeField] private string _gameSceneName = "GameScene";
 
@@ -14,7 +12,6 @@ namespace Project.Scripts.MainMenu
             if (!string.IsNullOrEmpty(_gameSceneName))
             {
                 SceneManager.LoadScene(_gameSceneName);
-                return;
             }
             else
             {

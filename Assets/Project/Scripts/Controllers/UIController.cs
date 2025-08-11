@@ -1,11 +1,10 @@
-﻿using Project.Scripts;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
-namespace InventorySystem
+namespace Scripts
 {
     public class UIController : MonoBehaviour
     {
+        public static UIController Instance;
         public bool IsOpened = true;
         
         [SerializeField] private ItemsDataList _itemDataList;
@@ -18,6 +17,11 @@ namespace InventorySystem
         
         private bool _isPickupWindowOpen = true;
 
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private void Start()
         {
