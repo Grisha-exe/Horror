@@ -122,30 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &708760 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8551749264297537858, guid: f64f28510a9d0024f83b05afbb5f86b7, type: 3}
-  m_PrefabInstance: {fileID: 2678540462320034050}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &708762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 708760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b61161ef91984325b3f02b44c96de77c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HotbarSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  activeSlotIndex: 0
 --- !u!1 &281710371
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,7 +941,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1633587792}
-  - component: {fileID: 1633587793}
   m_Layer: 0
   m_Name: Items
   m_TagString: Untagged
@@ -989,21 +964,6 @@ Transform:
   - {fileID: 1203123953}
   m_Father: {fileID: 638900409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1633587793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1633587791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92391f610cf4815498c068df1ea58be0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _items: []
-  ItemHolder: {fileID: 2100880494}
-  _itemsDataList: {fileID: 11400000, guid: 23ab81e5aa9c3264c8af3beb44b06f76, type: 2}
 --- !u!1 &2062894085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1087,7 +1047,6 @@ MonoBehaviour:
   _itemDataList: {fileID: 11400000, guid: 23ab81e5aa9c3264c8af3beb44b06f76, type: 2}
   _cameraController: {fileID: 330585548}
   InteractionPanel: {fileID: 1202041349069191665}
-  addItemsToHandsController: {fileID: 1633587793}
   InventoryOverlay: {fileID: 1489850769}
   IsOpened: 1
 --- !u!1 &2100880494
@@ -2039,7 +1998,7 @@ PrefabInstance:
     - target: {fileID: 3944041816927703356, guid: f64f28510a9d0024f83b05afbb5f86b7, type: 3}
       propertyPath: _itemsController
       value: 
-      objectReference: {fileID: 1633587793}
+      objectReference: {fileID: 0}
     - target: {fileID: 3944041816927703356, guid: f64f28510a9d0024f83b05afbb5f86b7, type: 3}
       propertyPath: _cameraController
       value: 
@@ -2047,7 +2006,7 @@ PrefabInstance:
     - target: {fileID: 3944041816927703356, guid: f64f28510a9d0024f83b05afbb5f86b7, type: 3}
       propertyPath: addItemsToHandsController
       value: 
-      objectReference: {fileID: 1633587793}
+      objectReference: {fileID: 0}
     - target: {fileID: 4858504446335023112, guid: f64f28510a9d0024f83b05afbb5f86b7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2639,10 +2598,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8551749264297537858, guid: f64f28510a9d0024f83b05afbb5f86b7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 708762}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f64f28510a9d0024f83b05afbb5f86b7, type: 3}
 --- !u!23 &2678540462320034051 stripped
 MeshRenderer:

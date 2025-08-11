@@ -13,20 +13,18 @@ MonoBehaviour:
   m_Name: ItemDataList
   m_EditorClassIdentifier: 
   items:
-  - Index: 0
+  - ItemIndex: 0
     ItemName: Empty
     ItemDescription: Empty
     ItemIcon: {fileID: 21300000, guid: 542ed92315f2a7c4c8f9dfd444ef1cf0, type: 3}
-    ModelPrefab: {fileID: 0}
-  - Index: 1
+    ItemModelPrefab: {fileID: 0}
+  - ItemIndex: 1
     ItemName: Flashlight
     ItemDescription: Flashlight ebaniy
     ItemIcon: {fileID: 21300000, guid: 1c126bb357c07bb48bc170ed877bebd5, type: 3}
-    ModelPrefab: {fileID: 919132149155446097, guid: d752120fe5b80f348ac427294a35696c,
-      type: 3}
-  - Index: 2
+    ItemModelPrefab: {fileID: 919132149155446097, guid: d752120fe5b80f348ac427294a35696c, type: 3}
+  - ItemIndex: 2
     ItemName: Oil Lamp
     ItemDescription: It shines well as long as there is kerosene.
     ItemIcon: {fileID: 21300000, guid: 35ef8dfd70742444ba793aa8b45b3a95, type: 3}
-    ModelPrefab: {fileID: 919132149155446097, guid: 05fc047dea0830541848f74e07d36937,
-      type: 3}
+    ItemModelPrefab: {fileID: 919132149155446097, guid: 05fc047dea0830541848f74e07d36937, type: 3}

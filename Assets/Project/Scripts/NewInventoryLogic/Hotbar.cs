@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,14 +6,21 @@ namespace Project.Scripts
 {
     public class Hotbar : MonoBehaviour
     {
-        [SerializeField] private List<PickapableItem> _items;
         [SerializeField] private GameObject ItemHolder;
         [SerializeField] private ItemsDataList _itemsDataList;
+        
         public List<UISlot> HotbarSlots = new List<UISlot>();
         public int activeSlotIndex = 0;
-
         private GameObject _itemInHands;
-
+        
+        private void Awake()
+        {
+            for (int i = 0; i < Inventory.Instance.borders.Count; i++)
+            {
+                Inventory.Instance.borders[i].SetActive(false);
+            }
+        }
+        
         public void AddItemToHands(string index)
         {
             Destroy(_itemInHands);
@@ -26,17 +32,6 @@ namespace Project.Scripts
         
             _itemInHands = Instantiate(Inventory.Instance.CurrentItems[int.Parse(index)].ItemModelPrefab, ItemHolder.transform);
             _itemInHands.transform.rotation = ItemHolder.transform.rotation;
-        }
-
-        private void Awake()
-        {
-            _items = FindObjectsOfType<PickapableItem>().ToList();
-
-            
-            for (int i = 0; i < Inventory.Instance.borders.Count; i++)
-            {
-                Inventory.Instance.borders[i].SetActive(false);
-            }
         }
 
         public void SetActiveSlot(int slotIndex)
