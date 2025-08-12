@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Scripts
@@ -14,17 +15,21 @@ namespace Scripts
             if (Physics.Raycast(ray, out RaycastHit hit, _rayLength))
             {
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
-                
-                var item = hit.collider.GetComponent<PickableItem>();
-                
-                if (item != null)
+
+                var trigger = hit.collider.GetComponent<ItemPickupTrigger>();
+
+                if (trigger != null)
                 {
-                    UIController.Instance.ShowPickupWindow(item.Index, item);
+                    var item = trigger.transform.GetComponentInParent<PickableItem>();
+                    
+                    if (item != null && item.gameObject.activeInHierarchy)
+                    {
+                        UIController.Instance.ShowPickupWindow(item.Index, item);
+                        return;
+                    }
                 }
-                else
-                {
-                    UIController.Instance.HidePickupWindow();
-                }
+                UIController.Instance.HidePickupWindow();
+                
             }
             else
             {

@@ -25,22 +25,22 @@ namespace Scripts
 
         private void Start()
         {
-            Hide();
+            HideInventoryOverlay();
             HidePickupWindow();
         }
 
-        public void Switch()
+        public void SwitchInventoryOverlay()
         {
             if (IsOpened)
             {
-                Hide();
+                HideInventoryOverlay();
                 _cameraController.IsMouseControlEnabled = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
             else
             {
-                Show();
+                ShowInventoryOverlay();
                 _cameraController.IsMouseControlEnabled = false;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -49,13 +49,13 @@ namespace Scripts
             
         }
 
-        private void Show()
+        private void ShowInventoryOverlay()
         {
             _inventoryOverlay.SetActive(true);
             IsOpened = true;
         }
 
-        private void Hide()
+        private void HideInventoryOverlay()
         {
             _inventoryOverlay.SetActive(false);
             IsOpened = false;
@@ -97,7 +97,13 @@ namespace Scripts
             {
                 if (Inventory.Instance.TryAddItemInInventory(_currentItemIndex))
                 {
+                    if (_currentPickUpPickableItem == null)
+                    {
+                        return;
+                    }
                     Destroy(_currentPickUpPickableItem.gameObject);
+                    _currentPickUpPickableItem = null;
+                    HidePickupWindow();
                 }
             }
         }

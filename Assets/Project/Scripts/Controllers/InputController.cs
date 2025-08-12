@@ -10,7 +10,7 @@ namespace Scripts
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Tab)) uiController.Switch();
+            if (Input.GetKeyDown(KeyCode.Tab)) uiController.SwitchInventoryOverlay();
             
             if (Input.GetKeyDown(KeyCode.LeftShift)) _playerController.SprintOn();
             
