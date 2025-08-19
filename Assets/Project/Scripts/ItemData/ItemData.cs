@@ -11,5 +11,6 @@ namespace Scripts
         [TextArea(1,10)] public string ItemDescription;
         public Sprite ItemIcon;
         public GameObject ItemModelPrefab;
+        public int ItemCount = 1;
     }
 }

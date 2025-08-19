@@ -12,7 +12,7 @@ namespace Scripts
         [SerializeField] private List<GameObject> _slotsBorders = new();
         [SerializeField] private Color _activeItemColor = Color.green;
         [SerializeField] private List<UISlot> _hotbarSlots = new();
-        
+
         public int activeSlotIndex = 0;
         private GameObject _currentItemInHands;
         private Color _colorInactive = Color.clear;
@@ -20,30 +20,38 @@ namespace Scripts
         private void Awake()
         {
             Instance = this;
-            
+
             for (int i = 0; i < _slotsBorders.Count; i++)
             {
                 _slotsBorders[i].GetComponent<Image>().color = _colorInactive;
             }
         }
 
-        public bool TryAddItem(string itemIndex, int itemsCount)
+        public bool TryAddItemInHotbar(string itemIndex, int itemsCount)
         {
             var item = _itemsDataList.GetItemDataByIndex(itemIndex);
-            
+
             for (int i = 0; i < _hotbarSlots.Count; i++)
             {
+                if (_hotbarSlots[i].Item.ItemIndex == itemIndex)
+                {
+                    var newItemsCount = int.Parse(_hotbarSlots[i].CountText.text) + itemsCount;
+                    _hotbarSlots[i].CountText.text = newItemsCount.ToString();
+                    return true;
+                }
+
                 if (string.IsNullOrEmpty(_hotbarSlots[i].Item.ItemIndex))
                 {
                     _hotbarSlots[i].Item = item;
+                    _hotbarSlots[i].CountText.text = itemsCount.ToString();
                     _hotbarSlots[i].Icon.sprite = item.ItemIcon;
                     return true;
                 }
             }
-            
+
             return false;
         }
-        
+
         private void AddItemToHands(string itemIndex)
         {
             if (string.IsNullOrEmpty(itemIndex))
@@ -51,7 +59,7 @@ namespace Scripts
                 Destroy(_currentItemInHands);
                 return;
             }
-            
+
             if (_currentItemInHands != null)
             {
                 Destroy(_currentItemInHands);
@@ -79,7 +87,7 @@ namespace Scripts
             }
 
             _slotsBorders[slotIndex].GetComponent<Image>().color = _activeItemColor;
-            
+
             AddItemToHands(_hotbarSlots[slotIndex].Item.ItemIndex);
         }
     }

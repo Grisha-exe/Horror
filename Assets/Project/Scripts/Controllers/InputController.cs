@@ -4,19 +4,18 @@ namespace Scripts
 {
     public class InputController : MonoBehaviour
     {
-        [SerializeField] private UIController uiController;
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private CameraController _cameraController;
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Tab)) uiController.SwitchInventoryOverlay();
+            if (Input.GetKeyDown(KeyCode.Tab)) UIController.Instance.SwitchInventoryOverlay();
             
             if (Input.GetKeyDown(KeyCode.LeftShift)) _playerController.SprintOn();
             
             if (Input.GetKeyUp(KeyCode.LeftShift)) _playerController.SprintOff();
             
-            if (Input.GetKeyDown(KeyCode.E)) uiController.PickUp();
+            if (Input.GetKeyDown(KeyCode.E)) UIController.Instance.PickUpItem();
             
             if (Input.GetKeyDown(KeyCode.Alpha1)) Hotbar.Instance.SetActiveSlot(0);
             

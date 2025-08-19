@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Scripts
 {
@@ -11,7 +12,7 @@ namespace Scripts
         [SerializeField] private Hotbar _hotbar;
         
         public List<ItemData> CurrentItems = new();
-        public List<UISlot> slots = new ();
+        [FormerlySerializedAs("slots")] public List<UISlot> InventorySlots = new ();
         
         public void Awake()
         {
@@ -20,27 +21,34 @@ namespace Scripts
         
         public void Start()
         {
-            for (int i = 0; i < slots.Count; i++)
+            for (int i = 0; i < InventorySlots.Count; i++)
             {
-                slots[i].Icon.sprite = _itemsDataList.GetDefaultItem().ItemIcon;
+                InventorySlots[i].Icon.sprite = _itemsDataList.GetDefaultItem().ItemIcon;
             }
         }
         
-        public bool TryAddItemInInventory(string index, int count = 1)
+        public bool TryAddItemInInventory(string ItemIndex, int itemsCount)
         {
-            if (_hotbar.TryAddItem(index, count))
+            if (_hotbar.TryAddItemInHotbar(ItemIndex, itemsCount))
             {
                 return true;
             }
 
-            var item = _itemsDataList.GetItemDataByIndex(index);
+            var item = _itemsDataList.GetItemDataByIndex(ItemIndex);
             
-            for (int i = 0; i < slots.Count; i++)
+            for (int i = 0; i < InventorySlots.Count; i++)
             {
-                if (string.IsNullOrEmpty(slots[i].Item.ItemIndex))
+                if (InventorySlots[i].Item.ItemIndex == ItemIndex)
                 {
-                    slots[i].Item = item;
-                    slots[i].Icon.sprite = item.ItemIcon;
+                    var newItemsCount = int.Parse(InventorySlots[i].CountText.text) + itemsCount;
+                    InventorySlots[i].CountText.text = newItemsCount.ToString();
+                    return true;
+                }
+                
+                if (string.IsNullOrEmpty(InventorySlots[i].Item.ItemIndex))
+                {
+                    InventorySlots[i].Item = item;
+                    InventorySlots[i].Icon.sprite = item.ItemIcon;
                     return true;
                 }
             }

@@ -5,6 +5,7 @@ namespace Scripts
     public class UIController : MonoBehaviour
     {
         public static UIController Instance;
+        
         public bool IsOpened = true;
         
         [SerializeField] private ItemsDataList _itemDataList;
@@ -13,6 +14,7 @@ namespace Scripts
         [SerializeField] private GameObject _inventoryOverlay;
 
         private string _currentItemIndex;
+        private int _currentItemCount = 1;
         private PickableItem _currentPickUpPickableItem;
         
         private bool _isPickupWindowOpen = true;
@@ -91,11 +93,11 @@ namespace Scripts
             _interactionPanel.gameObject.SetActive(false);
         }
 
-        public void PickUp()
+        public void PickUpItem()
         {
             if (_isPickupWindowOpen)
             {
-                if (Inventory.Instance.TryAddItemInInventory(_currentItemIndex))
+                if (Inventory.Instance.TryAddItemInInventory(_currentItemIndex, _currentItemCount))
                 {
                     if (_currentPickUpPickableItem == null)
                     {
