@@ -84,10 +84,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8713789564576080896}
-  - component: {fileID: 2674735887757170370}
-  - component: {fileID: -2798435382242249838}
+  - component: {fileID: 6254860934071030355}
+  - component: {fileID: 83809974789051126}
   m_Layer: 5
-  m_Name: UISlot
+  m_Name: InventoryItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,7 +115,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2674735887757170370
+--- !u!61 &6254860934071030355
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4589469903801443642}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 15, y: 15}
+  m_EdgeRadius: 0
+--- !u!114 &83809974789051126
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,30 +169,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4589469903801443642}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba82128c0154e0eb2eaf4af55212293, type: 3}
+  m_Script: {fileID: 11500000, guid: c8af67a704334d8d92f61bcbf66b5e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item:
-    ItemIndex: 
-    ItemName: 
-    ItemDescription: 
-    ItemIcon: {fileID: 0}
-    ItemModelPrefab: {fileID: 0}
-    ItemCount: 1
-  Icon: {fileID: 8805155674819409328}
-  CountText: {fileID: 2422412945073124120}
---- !u!114 &-2798435382242249838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4589469903801443642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5389f8f6a5ab3fc44a19024e2bb97f9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  ItemIndex: 
+  ItemName: 
+  ItemDescription: 
+  ItemIcon: {fileID: 8805155674819409328}
+  ItemCount: {fileID: 2422412945073124120}
 --- !u!1 &7182039739406878343
 GameObject:
   m_ObjectHideFlags: 0

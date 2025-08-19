@@ -209,12 +209,14 @@ MonoBehaviour:
   - {fileID: 7744327034818670588}
   - {fileID: 3218531403471463062}
   - {fileID: 4351177221361381477}
+  _activeItemColor: {r: 0, g: 1, b: 0, a: 1}
   _hotbarSlots:
   - {fileID: 8418666744998317758}
   - {fileID: 4445756656356424627}
   - {fileID: 2494024309849335757}
   - {fileID: 6726624166247690890}
   - {fileID: 6193857458222028877}
+  _inventoryItem: {fileID: 83809974789051126, guid: 40dbc826f88f5714ea06bc944b3cd782, type: 3}
   activeSlotIndex: 0
 --- !u!1 &4351177221361381477
 GameObject:

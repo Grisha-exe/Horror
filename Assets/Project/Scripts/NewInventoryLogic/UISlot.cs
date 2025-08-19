@@ -9,5 +9,6 @@ namespace Scripts
         public ItemData Item;
         public Image Icon;
         public TMP_Text CountText;
+        public InventoryItem InventoryItem;
     }
 }

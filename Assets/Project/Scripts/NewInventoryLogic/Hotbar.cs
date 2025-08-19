@@ -12,6 +12,7 @@ namespace Scripts
         [SerializeField] private List<GameObject> _slotsBorders = new();
         [SerializeField] private Color _activeItemColor = Color.green;
         [SerializeField] private List<UISlot> _hotbarSlots = new();
+        [SerializeField] private InventoryItem _inventoryItem;
 
         public int activeSlotIndex = 0;
         private GameObject _currentItemInHands;
@@ -40,11 +41,15 @@ namespace Scripts
                     return true;
                 }
 
-                if (string.IsNullOrEmpty(_hotbarSlots[i].Item.ItemIndex))
+                if (_hotbarSlots[i].InventoryItem == null)
                 {
-                    _hotbarSlots[i].Item = item;
-                    _hotbarSlots[i].CountText.text = itemsCount.ToString();
-                    _hotbarSlots[i].Icon.sprite = item.ItemIcon;
+                    var itemSlot = Instantiate(_inventoryItem, _hotbarSlots[i].transform);
+                    itemSlot.GetComponent<RectTransform>().SetParent(_hotbarSlots[i].GetComponent<RectTransform>(), false);
+                    itemSlot.GetComponent<RectTransform>().position =
+                        _hotbarSlots[i].GetComponent<RectTransform>().position;
+                    
+                    itemSlot.SetData(item);
+                    _hotbarSlots[i].InventoryItem = itemSlot;
                     return true;
                 }
             }
