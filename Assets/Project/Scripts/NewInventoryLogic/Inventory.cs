@@ -13,6 +13,7 @@ namespace Scripts
         
         public List<ItemData> CurrentItems = new();
         [FormerlySerializedAs("slots")] public List<UISlot> InventorySlots = new ();
+        public GameObject ItemDragContainer;
         
         public void Awake()
         {

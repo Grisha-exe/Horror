@@ -32,7 +32,9 @@ namespace Scripts
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            _rectTransform.SetParent(Inventory.Instance.ItemDragContainer.transform, false);
             transform.SetAsLastSibling();
+            
         }
 
 
