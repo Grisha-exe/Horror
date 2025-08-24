@@ -641,7 +641,7 @@ MonoBehaviour:
   _itemsDataList: {fileID: 11400000, guid: 23ab81e5aa9c3264c8af3beb44b06f76, type: 2}
   _hotbar: {fileID: 2292464543614836283}
   CurrentItems: []
-  slots:
+  InventorySlots:
   - {fileID: 925640483727351765}
   - {fileID: 5640352117733801488}
   - {fileID: 7277232882370478790}
@@ -1391,6 +1391,10 @@ PrefabInstance:
     - target: {fileID: 6935978220556814705, guid: 98971bcb05f6f854285c0433fcb0d28a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940636129656562971, guid: 98971bcb05f6f854285c0433fcb0d28a, type: 3}
+      propertyPath: m_Name
+      value: HotbarBackGround
       objectReference: {fileID: 0}
     - target: {fileID: 7090715378882465481, guid: 98971bcb05f6f854285c0433fcb0d28a, type: 3}
       propertyPath: m_SortingLayer
