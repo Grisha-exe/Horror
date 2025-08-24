@@ -34,15 +34,17 @@ namespace Scripts
 
             for (int i = 0; i < _hotbarSlots.Count; i++)
             {
-                if (_hotbarSlots[i].Item.ItemIndex == itemIndex)
+                if (_hotbarSlots[i].InventoryItem != null && _hotbarSlots[i].InventoryItem.ItemIndex == itemIndex)
                 {
-                    var newItemsCount = int.Parse(_hotbarSlots[i].CountText.text) + itemsCount;
-                    _hotbarSlots[i].CountText.text = newItemsCount.ToString();
+                    Debug.Log("Same Item found");
+                    var newItemsCount = int.Parse(_hotbarSlots[i].InventoryItem.ItemCount.text) + itemsCount;
+                    _hotbarSlots[i].InventoryItem.ItemCount.text = newItemsCount.ToString();
                     return true;
                 }
 
                 if (_hotbarSlots[i].InventoryItem == null)
                 {
+                    Debug.Log("New item found");
                     var itemSlot = Instantiate(_inventoryItem, _hotbarSlots[i].transform);
                     itemSlot.GetComponent<RectTransform>().SetParent(_hotbarSlots[i].GetComponent<RectTransform>(), false);
                     itemSlot.GetComponent<RectTransform>().position =

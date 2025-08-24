@@ -85,7 +85,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8713789564576080896}
   - component: {fileID: 2674735887757170370}
-  - component: {fileID: -2798435382242249838}
   - component: {fileID: 186812313120241680}
   m_Layer: 5
   m_Name: UISlot
@@ -135,18 +134,7 @@ MonoBehaviour:
     ItemCount: 1
   Icon: {fileID: 8805155674819409328}
   CountText: {fileID: 0}
---- !u!114 &-2798435382242249838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4589469903801443642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5389f8f6a5ab3fc44a19024e2bb97f9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  InventoryItem: {fileID: 0}
 --- !u!61 &186812313120241680
 BoxCollider2D:
   m_ObjectHideFlags: 0
