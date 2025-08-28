@@ -27,7 +27,7 @@ MonoBehaviour:
     ItemCount: 1
   - ItemIndex: 2
     ItemName: Oil Lamp
-    ItemDescription: Oil Lamp
+    ItemDescription: SASI
     ItemIcon: {fileID: 21300000, guid: 35ef8dfd70742444ba793aa8b45b3a95, type: 3}
     ItemModelPrefab: {fileID: 919132149155446097, guid: 05fc047dea0830541848f74e07d36937, type: 3}
     ItemCount: 1

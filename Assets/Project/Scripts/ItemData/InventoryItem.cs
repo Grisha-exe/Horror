@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Scripts
 {
-    public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public string ItemIndex;
         public string ItemName;
@@ -25,11 +26,13 @@ namespace Scripts
             ItemIcon.sprite = itemData.ItemIcon;
             ItemCount.text = itemData.ItemCount.ToString();
         }
-
+        
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
         }
+
+        
 
         public void SetUiSlot(UISlot uiSlot)
         {
@@ -72,6 +75,15 @@ namespace Scripts
             {
                 _uiSlot = other.GetComponent<UISlot>();
             }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            Inventory.Instance.ShowItemDescription(ItemIndex);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
         }
     }
 }

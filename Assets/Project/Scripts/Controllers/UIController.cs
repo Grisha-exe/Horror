@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Scripts
 {
@@ -6,7 +7,7 @@ namespace Scripts
     {
         public static UIController Instance;
         
-        public bool IsOpened = true;
+        public bool IsOpenedInventory = true;
         
         [SerializeField] private ItemsDataList _itemDataList;
         [SerializeField] private CameraController _cameraController;
@@ -33,7 +34,7 @@ namespace Scripts
 
         public void SwitchInventoryOverlay()
         {
-            if (IsOpened)
+            if (IsOpenedInventory)
             {
                 HideInventoryOverlay();
                 _cameraController.IsMouseControlEnabled = true;
@@ -54,13 +55,13 @@ namespace Scripts
         private void ShowInventoryOverlay()
         {
             _inventoryOverlay.SetActive(true);
-            IsOpened = true;
+            IsOpenedInventory = true;
         }
 
         private void HideInventoryOverlay()
         {
             _inventoryOverlay.SetActive(false);
-            IsOpened = false;
+            IsOpenedInventory = false;
         }
 
 

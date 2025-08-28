@@ -317,8 +317,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.398, z: 0.087}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1423,7 +1423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c33407861a463ab305346feb73bc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsOpened: 1
+  IsOpenedInventory: 1
   _itemDataList: {fileID: 11400000, guid: 23ab81e5aa9c3264c8af3beb44b06f76, type: 2}
   _cameraController: {fileID: 330585548}
   _interactionPanel: {fileID: 1202041349069191665}
@@ -2413,6 +2413,10 @@ PrefabInstance:
     - target: {fileID: 3120311406166523683, guid: f64f28510a9d0024f83b05afbb5f86b7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260202159395908444, guid: f64f28510a9d0024f83b05afbb5f86b7, type: 3}
+      propertyPath: m_Name
+      value: ItemDescription (TMP)
       objectReference: {fileID: 0}
     - target: {fileID: 3364705512864144536, guid: f64f28510a9d0024f83b05afbb5f86b7, type: 3}
       propertyPath: m_AnchorMax.y

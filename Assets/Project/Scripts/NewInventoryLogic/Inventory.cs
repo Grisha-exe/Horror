@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Scripts
 {
@@ -12,8 +13,10 @@ namespace Scripts
         [SerializeField] private Hotbar _hotbar;
         
         public List<ItemData> CurrentItems = new();
-        [FormerlySerializedAs("slots")] public List<UISlot> InventorySlots = new ();
+        public List<UISlot> InventorySlots = new ();
         public GameObject ItemDragContainer;
+        public Image ItemImage;
+        public TMP_Text ItemDescription;
         
         public void Awake()
         {
@@ -56,6 +59,12 @@ namespace Scripts
 
             Debug.Log("Inventory is full");
             return false;
+        }
+
+        public void ShowItemDescription(string itemIndex)
+        {
+            ItemImage.sprite = _itemsDataList.GetItemDataByIndex(itemIndex).ItemIcon;
+            ItemDescription.text = _itemsDataList.GetItemDataByIndex(itemIndex).ItemDescription;
         }
     }
 }
