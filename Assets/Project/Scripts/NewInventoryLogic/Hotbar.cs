@@ -14,9 +14,10 @@ namespace Scripts
         [SerializeField] private List<UISlot> _hotbarSlots = new();
         [SerializeField] private InventoryItem _inventoryItem;
 
-        public int activeSlotIndex = 0;
+        public int ActiveSlotIndex = 0;
+        
         private GameObject _currentItemInHands;
-        private Color _colorInactive = Color.clear;
+        private Color _inactiveItemColor = Color.clear;
 
         private void Awake()
         {
@@ -24,19 +25,19 @@ namespace Scripts
 
             for (int i = 0; i < _slotsBorders.Count; i++)
             {
-                _slotsBorders[i].GetComponent<Image>().color = _colorInactive;
+                _slotsBorders[i].GetComponent<Image>().color = _inactiveItemColor;
+                _slotsBorders[ActiveSlotIndex].GetComponent<Image>().color = _activeItemColor;
             }
         }
 
         public bool TryAddItemInHotbar(string itemIndex, int itemsCount)
         {
-            var item = _itemsDataList.GetItemDataByIndex(itemIndex);
+            var addableItem = _itemsDataList.GetItemDataByIndex(itemIndex);
 
             for (int i = 0; i < _hotbarSlots.Count; i++)
             {
                 if (_hotbarSlots[i].InventoryItem != null && _hotbarSlots[i].InventoryItem.ItemIndex == itemIndex)
                 {
-                    Debug.Log("Same Item found");
                     var newItemsCount = int.Parse(_hotbarSlots[i].InventoryItem.ItemCount.text) + itemsCount;
                     _hotbarSlots[i].InventoryItem.ItemCount.text = newItemsCount.ToString();
                     return true;
@@ -44,14 +45,21 @@ namespace Scripts
 
                 if (_hotbarSlots[i].InventoryItem == null)
                 {
-                    Debug.Log("New item found");
                     var itemSlot = Instantiate(_inventoryItem, _hotbarSlots[i].transform);
-                    itemSlot.GetComponent<RectTransform>().SetParent(_hotbarSlots[i].GetComponent<RectTransform>(), false);
+                    itemSlot.GetComponent<RectTransform>()
+                        .SetParent(_hotbarSlots[i].GetComponent<RectTransform>(), false);
                     itemSlot.GetComponent<RectTransform>().position =
                         _hotbarSlots[i].GetComponent<RectTransform>().position;
-                    
-                    itemSlot.SetData(item);
+
+                    itemSlot.SetData(addableItem);
+                    itemSlot.SetUiSlot(_hotbarSlots[i]);
                     _hotbarSlots[i].InventoryItem = itemSlot;
+
+                    if (i == ActiveSlotIndex)
+                    {
+                        AddItemToHands(itemIndex);
+                    }
+                    
                     return true;
                 }
             }
@@ -59,7 +67,24 @@ namespace Scripts
             return false;
         }
 
-        private void AddItemToHands(string itemIndex)
+        public void ClearUISlot(UISlot uiSlot)
+        {
+            for (int i = 0; i < _hotbarSlots.Count; i++)
+            {
+                if (_hotbarSlots[i] == uiSlot)
+                {
+                    _hotbarSlots[i].InventoryItem = null;
+                    _hotbarSlots[i].Item = null;
+                }
+
+                if (i == ActiveSlotIndex)
+                {
+                    AddItemToHands(_itemsDataList.GetDefaultItem().ItemIndex);
+                }
+            }
+        }
+
+        public void AddItemToHands(string itemIndex)
         {
             if (string.IsNullOrEmpty(itemIndex))
             {
@@ -67,7 +92,7 @@ namespace Scripts
                 return;
             }
 
-            if (_currentItemInHands != null)
+            if (_currentItemInHands == null)
             {
                 Destroy(_currentItemInHands);
             }
@@ -78,24 +103,32 @@ namespace Scripts
             _currentItemInHands.transform.rotation = _itemHolder.transform.rotation;
         }
 
-        public void SetActiveSlot(int slotIndex)
+        public void SetActiveSlot(int hotbarSlotIndex)
         {
-            if (slotIndex < 0 || slotIndex >= _hotbarSlots.Count || slotIndex == activeSlotIndex)
+            if (hotbarSlotIndex < 0 || hotbarSlotIndex >= _hotbarSlots.Count || hotbarSlotIndex == ActiveSlotIndex)
             {
                 return;
             }
 
-            activeSlotIndex = slotIndex;
-            Debug.Log("Active slot: " + activeSlotIndex);
+            ActiveSlotIndex = hotbarSlotIndex;
 
             for (int i = 0; i < _slotsBorders.Count; i++)
             {
-                _slotsBorders[i].GetComponent<Image>().color = _colorInactive;
+                _slotsBorders[i].GetComponent<Image>().color = _inactiveItemColor;
             }
 
-            _slotsBorders[slotIndex].GetComponent<Image>().color = _activeItemColor;
-
-            AddItemToHands(_hotbarSlots[slotIndex].Item.ItemIndex);
+            _slotsBorders[hotbarSlotIndex].GetComponent<Image>().color = _activeItemColor;
+            
+            _hotbarSlots[hotbarSlotIndex].IsActive = true;
+            
+            if (_hotbarSlots[hotbarSlotIndex].InventoryItem != null)
+            {
+                AddItemToHands(_hotbarSlots[hotbarSlotIndex].InventoryItem.ItemIndex);
+            }
+            else
+            {
+                AddItemToHands(_itemsDataList.GetDefaultItem().ItemIndex);
+            }
         }
     }
 }

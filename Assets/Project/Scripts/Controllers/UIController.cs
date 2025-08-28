@@ -15,7 +15,7 @@ namespace Scripts
 
         private string _currentItemIndex;
         private int _currentItemCount = 1;
-        private PickableItem _currentPickUpPickableItem;
+        private PickableItem _currentPickableItem;
         
         private bool _isPickupWindowOpen = true;
 
@@ -79,7 +79,7 @@ namespace Scripts
             {
                 _interactionPanel.SetDataForInteraction(item.ItemName);
                 _currentItemIndex = index;
-                _currentPickUpPickableItem = pickableItem;
+                _currentPickableItem = pickableItem;
             }
         }
 
@@ -99,12 +99,12 @@ namespace Scripts
             {
                 if (Inventory.Instance.TryAddItemInInventory(_currentItemIndex, _currentItemCount))
                 {
-                    if (_currentPickUpPickableItem == null)
+                    if (_currentPickableItem == null)
                     {
                         return;
                     }
-                    Destroy(_currentPickUpPickableItem.gameObject);
-                    _currentPickUpPickableItem = null;
+                    Destroy(_currentPickableItem.gameObject);
+                    _currentPickableItem = null;
                     HidePickupWindow();
                 }
             }
