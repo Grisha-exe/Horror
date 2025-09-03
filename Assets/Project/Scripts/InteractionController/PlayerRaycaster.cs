@@ -16,11 +16,12 @@ namespace Scripts
             {
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
 
-                var trigger = hit.collider.GetComponent<ItemPickupTrigger>();
+                var triggerOfPickableItem = hit.collider.GetComponent<ItemPickupTrigger>();
+                var triggerOfInterractableObject = hit.collider.GetComponent<InterractableObject>();
 
-                if (trigger != null)
+                if (triggerOfPickableItem != null)
                 {
-                    var item = trigger.transform.GetComponentInParent<PickableItem>();
+                    var item = triggerOfPickableItem.transform.GetComponentInParent<PickableItem>();
                     
                     if (item != null && item.gameObject.activeInHierarchy)
                     {
@@ -28,6 +29,13 @@ namespace Scripts
                         return;
                     }
                 }
+
+                if (triggerOfInterractableObject != null)
+                {
+                    UIController.Instance.ShowInterractionWithBox();
+                }
+                
+                
                 UIController.Instance.HidePickupWindow();
                 
             }
@@ -35,6 +43,7 @@ namespace Scripts
             {
                 Debug.DrawRay(ray.origin, ray.direction * _rayLength, Color.blue);
                 UIController.Instance.HidePickupWindow();
+                UIController.Instance.HideInterractionWithBox();
             }
         }
     }

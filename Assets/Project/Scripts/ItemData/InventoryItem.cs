@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Scripts
 {
-    public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+    public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler
     {
         public string ItemIndex;
         public string ItemName;
@@ -80,10 +80,6 @@ namespace Scripts
         public void OnPointerEnter(PointerEventData eventData)
         {
             Inventory.Instance.ShowItemDescription(ItemIndex);
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
         }
     }
 }

@@ -110,5 +110,17 @@ namespace Scripts
                 }
             }
         }
+
+        public void ShowInterractionWithBox()
+        {
+            _interactionPanel.gameObject.SetActive(true);
+            
+            _interactionPanel.OpenInteractionPanel();
+        }
+
+        public void HideInterractionWithBox()
+        {
+            _interactionPanel.gameObject.SetActive(false);
+        }
     }
 }
