@@ -14,6 +14,8 @@ namespace Scripts
         [SerializeField] private InteractionPanel _interactionPanel;
         [SerializeField] private GameObject _inventoryOverlay;
 
+        public bool IsInteractWindowOpen = false;
+        
         private string _currentItemIndex;
         private int _currentItemCount = 1;
         private PickableItem _currentPickableItem;
@@ -114,13 +116,14 @@ namespace Scripts
         public void ShowInterractionWithBox()
         {
             _interactionPanel.gameObject.SetActive(true);
-            
+            IsInteractWindowOpen = true;
             _interactionPanel.OpenInteractionPanel();
         }
 
         public void HideInterractionWithBox()
         {
             _interactionPanel.gameObject.SetActive(false);
+            IsInteractWindowOpen = false;
         }
     }
 }

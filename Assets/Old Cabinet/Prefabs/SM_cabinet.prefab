@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3360755759113466536}
   - component: {fileID: 1804841859256777997}
   - component: {fileID: 4533120767836129735}
+  - component: {fileID: 1894879451998475469}
   m_Layer: 0
   m_Name: SM_cabinet
   m_TagString: Untagged
@@ -89,6 +90,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1894879451998475469
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731465206210111506}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0416846, y: 1.9836863, z: 0.5493264}
+  m_Center: {x: -0.00000047683716, y: 0.99184734, z: -0.000000014901158}
 --- !u!1 &3282356264834113563
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +540,7 @@ GameObject:
   - component: {fileID: 214976426076013132}
   - component: {fileID: 1804535851968715321}
   - component: {fileID: 6923077186022201216}
+  - component: {fileID: 2309090113334662766}
   m_Layer: 0
   m_Name: cabinet_door_01
   m_TagString: Untagged
@@ -624,3 +647,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f737e42c76a64fb39bda159add3c2a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2309090113334662766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8176682599046558721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca6d5630831460d9fdbd7d3fe4df93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openAngle: 90
+  speed: 2
+  isOpen: 0

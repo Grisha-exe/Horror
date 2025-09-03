@@ -26,6 +26,7 @@ namespace Scripts
             if (Input.GetKeyDown(KeyCode.Alpha4)) Hotbar.Instance.SetActiveSlot(3);
             
             if (Input.GetKeyDown(KeyCode.Alpha5)) Hotbar.Instance.SetActiveSlot(4);
+            
         }
     }
 }
