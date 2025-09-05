@@ -6,6 +6,8 @@ namespace Scripts
     public class PlayerRaycaster : MonoBehaviour
     {
         [SerializeField] private float _rayLength = 5f;
+        
+        public InteractableObject CurrentInteractableObject;
 
         private void Update()
         {
@@ -17,7 +19,7 @@ namespace Scripts
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
 
                 var triggerOfPickableItem = hit.collider.GetComponent<ItemPickupTrigger>();
-                var triggerOfInterractableObject = hit.collider.GetComponent<InterractableObject>();
+                var triggerOfInteractableObject = hit.collider.GetComponent<InteractableObject>();
 
                 if (triggerOfPickableItem != null)
                 {
@@ -30,21 +32,23 @@ namespace Scripts
                     }
                 }
 
-                if (triggerOfInterractableObject != null)
+                if (triggerOfInteractableObject != null)
                 {
+                    CurrentInteractableObject = triggerOfInteractableObject;
                     UIController.Instance.ShowInterractionWithBox();
                 }
                 
-                
                 UIController.Instance.HidePickupWindow();
-                
             }
             else
             {
                 Debug.DrawRay(ray.origin, ray.direction * _rayLength, Color.blue);
                 UIController.Instance.HidePickupWindow();
                 UIController.Instance.HideInterractionWithBox();
+                CurrentInteractableObject = null;
             }
         }
+        
+        
     }
 }

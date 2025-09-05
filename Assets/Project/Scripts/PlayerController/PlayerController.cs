@@ -4,6 +4,7 @@ namespace Scripts
 {
     public class PlayerController : MonoBehaviour
     {
+        public PlayerRaycaster PlayerRaycaster;
         public float MoveSpeed = 5.0f;
         public float SprintMoveSpeed;
 
@@ -37,6 +38,14 @@ namespace Scripts
         public void SprintOff()
         {
             _currentMoveSpeed = MoveSpeed;
+        }
+
+        public void Interact()
+        {
+            if (PlayerRaycaster.CurrentInteractableObject != null)
+            {
+                PlayerRaycaster.CurrentInteractableObject.Interact();
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Scripts
 
         public bool IsInteractWindowOpen = false;
         
+        private Door _door;
         private string _currentItemIndex;
         private int _currentItemCount = 1;
         private PickableItem _currentPickableItem;
@@ -124,6 +125,14 @@ namespace Scripts
         {
             _interactionPanel.gameObject.SetActive(false);
             IsInteractWindowOpen = false;
+        }
+
+        public void OpenOrCloseBox()
+        {
+            if (IsInteractWindowOpen)
+            {
+                
+            }
         }
     }
 }

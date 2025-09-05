@@ -1,11 +1,13 @@
-﻿    using Scripts;
+﻿    using System.Collections;
+    using System.Collections.Generic;
+    using Scripts;
     using UnityEngine;
     using UnityEngine.Serialization;
 
-    public class Door : MonoBehaviour
+    public class Door : InteractableObject
     {
-        public float openAngle = 90f;   // на сколько градусов откроется
-        public float speed = 2f;        // скорость открытия
+        public float openAngle = -90f;   
+        public float speed = 2f;        
         public bool isOpenDoor = false;
 
         private Quaternion closedRotation;
@@ -14,21 +16,30 @@
         void Start()
         {
             closedRotation = transform.rotation;
-            openRotation = Quaternion.Euler(0, openAngle, 0) * closedRotation;
+            openRotation = Quaternion.Euler(0, openAngle, 0);
         }
 
-        public void SwitchDoor()
+        public override void Interact()
         {
             if (!isOpenDoor)
             {
-                if (UIController.Instance.IsInteractWindowOpen)
-                {
-                    transform.rotation = Quaternion.Lerp(transform.rotation, openRotation, Time.deltaTime * speed);
-                }
+                StartCoroutine(OpenDoor());
             }
             else
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, closedRotation, Time.deltaTime * speed);
+            }
+        }
+
+        private IEnumerator OpenDoor()
+        {
+            float currentState = 0f;
+                
+            while(currentState < 1f)
+            {
+                currentState += Time.deltaTime / speed;    
+                transform.rotation = Quaternion.Lerp(transform.rotation, openRotation, currentState);
+                yield return new WaitForEndOfFrame();
             }
         }
     }

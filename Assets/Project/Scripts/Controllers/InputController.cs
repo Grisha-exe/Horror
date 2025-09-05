@@ -27,6 +27,7 @@ namespace Scripts
             
             if (Input.GetKeyDown(KeyCode.Alpha5)) Hotbar.Instance.SetActiveSlot(4);
             
+            if (Input.GetKeyDown(KeyCode.E)) _playerController.Interact();
         }
     }
 }
