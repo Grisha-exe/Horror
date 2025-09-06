@@ -6,17 +6,27 @@
     {        
         public bool IsOpenDoor;
 
+        
+        private Quaternion _openedRotationPosition;
+        private Quaternion _closedRotationPosition;
+
+        public void Start()
+        {
+            _openedRotationPosition = transform.rotation;
+            _closedRotationPosition = Quaternion.Euler(0, -90, 0);
+        }
+
         public override void Interact()
         {
             if (!IsOpenDoor)
             {
                 IsOpenDoor = true;
-                transform.DORotate(new Vector3(0, 90, 0), 1f, RotateMode.LocalAxisAdd);
+                transform.DORotateQuaternion(_closedRotationPosition, 1f);
             }
             else
             {
+                transform.DORotateQuaternion(_openedRotationPosition, 1f);
                 IsOpenDoor = false;
-                transform.DORotate(new Vector3(0, -90, 0), 1f, RotateMode.LocalAxisAdd);
             }
         }
     }
