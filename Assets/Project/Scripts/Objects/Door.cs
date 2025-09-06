@@ -1,45 +1,22 @@
-﻿    using System.Collections;
-    using System.Collections.Generic;
+﻿    using DG.Tweening;
     using Scripts;
     using UnityEngine;
-    using UnityEngine.Serialization;
 
     public class Door : InteractableObject
-    {
-        public float openAngle = -90f;   
-        public float speed = 2f;        
-        public bool isOpenDoor = false;
-
-        private Quaternion closedRotation;
-        private Quaternion openRotation;
-
-        void Start()
-        {
-            closedRotation = transform.rotation;
-            openRotation = Quaternion.Euler(0, openAngle, 0);
-        }
+    {        
+        public bool IsOpenDoor;
 
         public override void Interact()
         {
-            if (!isOpenDoor)
+            if (!IsOpenDoor)
             {
-                StartCoroutine(OpenDoor());
+                IsOpenDoor = true;
+                transform.DORotate(new Vector3(0, 90, 0), 1f, RotateMode.LocalAxisAdd);
             }
             else
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, closedRotation, Time.deltaTime * speed);
-            }
-        }
-
-        private IEnumerator OpenDoor()
-        {
-            float currentState = 0f;
-                
-            while(currentState < 1f)
-            {
-                currentState += Time.deltaTime / speed;    
-                transform.rotation = Quaternion.Lerp(transform.rotation, openRotation, currentState);
-                yield return new WaitForEndOfFrame();
+                IsOpenDoor = false;
+                transform.DORotate(new Vector3(0, -90, 0), 1f, RotateMode.LocalAxisAdd);
             }
         }
     }
