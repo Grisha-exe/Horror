@@ -5,7 +5,7 @@
     public class Door : InteractableObject
     {        
         public bool IsOpenDoor;
-
+        public float RotationAngle;
         
         private Quaternion _openedRotationPosition;
         private Quaternion _closedRotationPosition;
@@ -13,7 +13,7 @@
         public void Start()
         {
             _openedRotationPosition = transform.rotation;
-            _closedRotationPosition = Quaternion.Euler(0, -90, 0);
+            _closedRotationPosition = Quaternion.Euler(0, RotationAngle, 0);
         }
 
         public override void Interact()
