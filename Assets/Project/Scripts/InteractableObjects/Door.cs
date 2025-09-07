@@ -1,32 +1,25 @@
-﻿    using DG.Tweening;
-    using Scripts;
-    using UnityEngine;
+﻿using DG.Tweening;
+using Scripts;
+using UnityEngine;
 
-    public class Door : InteractableObject
-    {        
-        public bool IsOpenDoor;
-        public float RotationAngle;
-        
-        private Quaternion _openedRotationPosition;
-        private Quaternion _closedRotationPosition;
+public class Door : InteractableObject
+{
+    [SerializeField] private float _duration = 1f;
+    [SerializeField] private Vector3 _openRotation = new Vector3(0, 90, 0);
 
-        public void Start()
+    private bool _isOpen = false;
+
+    public override void Interact()
+    {
+        if (_isOpen)
         {
-            _openedRotationPosition = transform.rotation;
-            _closedRotationPosition = Quaternion.Euler(0, RotationAngle, 0);
+            transform.DOLocalRotate(Vector3.zero, _duration);
+        }
+        else
+        {
+            transform.DOLocalRotate(_openRotation, _duration);
         }
 
-        public override void Interact()
-        {
-            if (!IsOpenDoor)
-            {
-                IsOpenDoor = true;
-                transform.DORotateQuaternion(_closedRotationPosition, 1f);
-            }
-            else
-            {
-                transform.DORotateQuaternion(_openedRotationPosition, 1f);
-                IsOpenDoor = false;
-            }
-        }
+        _isOpen = !_isOpen;
     }
+}
